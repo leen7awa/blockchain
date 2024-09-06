@@ -1,25 +1,16 @@
 {
   "builds": [
     {
-      "src": "back/app.js",
-      "use": "@vercel/node"
+      "src": "front/package.json",
+      "use": "@vercel/static-build"
     },
     {
-      "src": "front/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/build"
-      }
+      "src": "back/app.js", 
+      "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/back/app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/front/$1"
-    }
+    { "src": "/api/(.*)", "dest": "/back/$1" },
+    { "src": "/(.*)", "dest": "/front/$1" }
   ]
 }
