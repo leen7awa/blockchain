@@ -36,7 +36,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  localStorage.removeItem('auth');
+  // localStorage.removeItem('auth');
 
   if (localStorage.auth !== undefined) {
     const token = JSON.parse(localStorage.auth);
