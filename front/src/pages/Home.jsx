@@ -145,10 +145,7 @@ const Home = () => {
       <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
         <Container className='my-2'>
           <Navbar.Brand className='w-25'>
-            {/*<Button variant='dark' onClick={showNetworkModal} className='d-flex'>
-              <span>Ethereum Mainnet</span>
-              <FaSortDown />
-            </Button>*/}
+
             <Link to={'#'} className='text-decoration-none'>
               <h1 className='my-0'>HD Wallet</h1>
             </Link>
@@ -156,16 +153,22 @@ const Home = () => {
           <Navbar.Brand>
             <div className='d-flex flex-column'>
               <div className='d-flex justify-content-center'>
-                <Button variant='dark' onClick={showAccountModal} className='d-flex'>
+                {/* <Button variant='dark' onClick={showAccountModal} className='d-flex'>
                   <span>{Object.keys(account).length ? account.name : 'No account'}</span>
+                  <span>{account.name}</span>
                   <FaSortDown />
-                </Button>
+                </Button> */}
+                <div variant='dark' onClick={showAccountModal} className='d-flex'>
+                  {/* <span>{Object.keys(account).length ? account.name : 'No account'}</span> */}
+                  <span>Your Wallet</span>
+                  {/* <FaSortDown /> */}
+                </div>
               </div>
-              <p className='mb-0 text-center'>{Object.keys(account).length ? account.publicKey?.slice(0, 6) + '...' + account.publicKey?.slice(-5) : ''}</p>
+              <p className='mb-0 text-center'>{account.publicKey}</p>
             </div>
           </Navbar.Brand>
           <div className='w-25 d-flex justify-content-end align-items-center'>
-            <h5 className='my-0 text-white me-2'>User: {username}</h5>
+            {/* <h5 className='my-0 text-white me-2'>User: {username}</h5> */}
             <button className='btn btn-dark'
               onClick={() => {
                 delete axios.defaults.headers.common['authorization'];
@@ -173,7 +176,6 @@ const Home = () => {
                 navigate("/");
               }}>
               <span className='me-2'>Logout</span>
-              <FaSignOutAlt />
             </button>
           </div>
         </Container>
@@ -244,24 +246,6 @@ const Home = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* <Modal show={isShowNetworkModal} onHide={closeNetworkModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Select a network</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className='d-flex flex-column'>
-            <Button variant='dark' className='mb-1'>Ethereum Mainnet</Button>
-            <Button variant='dark'>Bitcoin Mainnet</Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer className='d-flex justify-content-center'>
-          <Button variant="dark" onClick={closeNetworkModal} className='d-flex align-items-center w-100 justify-content-center'>
-            <FaPlus className='me-1' />
-            <span>Add network</span>
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
       <Modal show={isShowPrivateKeyModal} onHide={closePrivateKeyModal}>
         <Modal.Header closeButton>
           <Modal.Title>Private key</Modal.Title>

@@ -36,6 +36,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // localStorage.removeItem('auth');
+
   if (localStorage.auth !== undefined) {
     const token = JSON.parse(localStorage.auth);
     axios.defaults.baseURL = 'http://localhost:3000';

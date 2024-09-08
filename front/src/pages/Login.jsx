@@ -9,6 +9,8 @@ import { FaSignInAlt } from "react-icons/fa";
 import Form from "react-bootstrap/Form";
 
 const Login = () => {
+  localStorage.removeItem('auth');
+
   const [showPassword, setShowPassword] = useState(false);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("auth")) || "");
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ const Login = () => {
         axios.defaults.headers.common['authorization'] = `Bearer ${response.data.token}`;
         toast.success("Login successfull");
         navigate("/home");
+        // navigate("/restore");
       } catch (err) {
         toast.error(err.message);
       }
@@ -83,7 +86,7 @@ const Login = () => {
             </form>
             <div className="login-bottom-p"
             style={{ fontSize: '15px' }}>
-              <a href="#" className="forgot-pass-link">
+              <a href="/restore" className="forgot-pass-link">
                 Forgot password?
               </a>
             </div>

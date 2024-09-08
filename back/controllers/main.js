@@ -234,6 +234,68 @@ const loadSeedPhrase = async (req, res) => {
   }
 }
 
+const bcrypt = require('bcrypt'); // Import bcrypt for hashing the password
+
+const changePassword = async (req, res) => {
+  const { newPassword } = req.body;
+
+  if (!newPassword) {
+    return res.status(400).json({ message: "New password is required" });
+  }
+
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password
+    user.password = hashedPassword;
+    await user.save();
+
+    return res.status(200).json({ message: "Password changed successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Error changing password" });
+  }
+};
+
+// const loadSeedPhrase = async (req, res) => {
+//   const { username } = req.params;
+//   try {
+//     const user = await User.findOne({ username });
+//     if (user) {
+//       return res.status(200).json({ seedPhrase: user.seedPhrase });
+//     } else {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+//   } catch (error) {
+//     return res.status(400).json({ message: "Failed to load seed phrase" });
+//   }
+// };
+
+
+// const fetchSeedPhrase = async (req, res) => {
+//   const { username } = req.body;
+//   if (!username) {
+//     return res.status(400).json({ message: "Username is required" });
+//   }
+
+//   try {
+//     const user = await User.findOne({ username });
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+//     return res.status(200).json({ seedPhrase: user.seedPhrase });
+//   } catch (error) {
+//     return res.status(500).json({ message: "Error fetching seed phrase" });
+//   }
+// };
+
+
 module.exports = {
   login,
   register,
@@ -244,4 +306,5 @@ module.exports = {
   checkBalance,
   restoreWallet,
   loadSeedPhrase
+  // fetchSeedPhrase
 };
