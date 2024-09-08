@@ -159,16 +159,13 @@ const Home = () => {
                   <FaSortDown />
                 </Button> */}
                 <div variant='dark' onClick={showAccountModal} className='d-flex'>
-                  {/* <span>{Object.keys(account).length ? account.name : 'No account'}</span> */}
-                  <span>Your Wallet</span>
-                  {/* <FaSortDown /> */}
+                  <span>{username}</span>
                 </div>
               </div>
               <p className='mb-0 text-center'>{account.publicKey}</p>
             </div>
           </Navbar.Brand>
           <div className='w-25 d-flex justify-content-end align-items-center'>
-            {/* <h5 className='my-0 text-white me-2'>User: {username}</h5> */}
             <button className='btn btn-dark'
               onClick={() => {
                 delete axios.defaults.headers.common['authorization'];
