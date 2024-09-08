@@ -170,24 +170,27 @@ const sendTransaction = async (req, res) => {
 }
 
 const checkBalance = async (req, res) => {
+  console.log("etherProvide")
+  
   try {
     // Replace with your Ethereum address
     const address = req.body.address;
-
+    
+    // return res.status(200).json({status: process.env.INFURA_API_KEY});
     const ethProvider = new ethers.providers.InfuraProvider("mainnet", process.env.INFURA_API_KEY);
-
+    
     // Get Ethereum balance
     const ethBalance = await ethProvider.getBalance(address);
     const ethResponse = await axios.get('https://api-pub.bitfinex.com/v2/ticker/tETHUSD');
     const ethUsd = ethResponse.data[6];
-
+    
     const optimismNodeUrl = 'https://mainnet.optimism.io'; // or your node provider URL
     const provider = new ethers.providers.JsonRpcProvider(optimismNodeUrl);
 
     const balance = await provider.getBalance(address);
     const optBalance = ethers.utils.formatEther(balance);
 
-    const optResponse = await await axios.get('https://min-api.cryptocompare.com/data/price', {
+    const optResponse = await axios.get('https://min-api.cryptocompare.com/data/price', {
       params: {
         fsym: 'OP',
         tsyms: 'USD'

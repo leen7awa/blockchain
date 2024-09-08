@@ -31,6 +31,7 @@ const Home = () => {
     token: '',
     amount: 0
   });
+  
   const [isSending, setIsSending] = useState(false);
   const [balanceInfo, setBalanceInfo] = useState({});
   // const [balance, setBalance] = useState('0.0');
