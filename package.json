@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "start": "concurrently \"npm run dev --prefix front\" \"npm start --prefix back\""
+        "start": "concurrently \"npm run dev --prefix front\" \"npm start --prefix back\"",
+        "build": "react-scripts build"
     },
     "devDependencies": {
         "concurrently": "^7.0.0"
