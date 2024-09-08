@@ -84,12 +84,12 @@ const Login = () => {
                 <button className="btn btn-dark w-100 py-3">Login</button>
               </div>
             </form>
-            {/* <div className="login-bottom-p"
+            <div className="login-bottom-p"
             style={{ fontSize: '15px' }}>
               <a href="/restore" className="forgot-pass-link">
-                Forgot password?
+                Forgot your seed phrase?
               </a>
-            </div> */}
+            </div>
             <p className="login-bottom-p"
               style={{ fontSize: '15px' }}>
               Don't have an account? <Link to="/register">Sign Up</Link>

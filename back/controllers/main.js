@@ -170,27 +170,24 @@ const sendTransaction = async (req, res) => {
 }
 
 const checkBalance = async (req, res) => {
-  console.log("etherProvide")
-  
   try {
     // Replace with your Ethereum address
     const address = req.body.address;
-    
-    // return res.status(200).json({status: process.env.INFURA_API_KEY});
+
     const ethProvider = new ethers.providers.InfuraProvider("mainnet", process.env.INFURA_API_KEY);
-    
+
     // Get Ethereum balance
     const ethBalance = await ethProvider.getBalance(address);
     const ethResponse = await axios.get('https://api-pub.bitfinex.com/v2/ticker/tETHUSD');
     const ethUsd = ethResponse.data[6];
-    
+
     const optimismNodeUrl = 'https://mainnet.optimism.io'; // or your node provider URL
     const provider = new ethers.providers.JsonRpcProvider(optimismNodeUrl);
 
     const balance = await provider.getBalance(address);
     const optBalance = ethers.utils.formatEther(balance);
 
-    const optResponse = await axios.get('https://min-api.cryptocompare.com/data/price', {
+    const optResponse = await await axios.get('https://min-api.cryptocompare.com/data/price', {
       params: {
         fsym: 'OP',
         tsyms: 'USD'
@@ -237,7 +234,7 @@ const loadSeedPhrase = async (req, res) => {
   }
 }
 
-const bcrypt = require('bcrypt'); // Import bcrypt for hashing the password
+// const bcrypt = require('bcrypt'); // Import bcrypt for hashing the password
 
 const changePassword = async (req, res) => {
   const { newPassword } = req.body;
@@ -281,22 +278,22 @@ const changePassword = async (req, res) => {
 // };
 
 
-// const fetchSeedPhrase = async (req, res) => {
-//   const { username } = req.body;
-//   if (!username) {
-//     return res.status(400).json({ message: "Username is required" });
-//   }
+const fetchSeedPhrase = async (req, res) => {
+  const { username } = req.body;
+  if (!username) {
+    return res.status(400).json({ message: "Username is required" });
+  }
 
-//   try {
-//     const user = await User.findOne({ username });
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     return res.status(200).json({ seedPhrase: user.seedPhrase });
-//   } catch (error) {
-//     return res.status(500).json({ message: "Error fetching seed phrase" });
-//   }
-// };
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ seedPhrase: user.seedPhrase });
+  } catch (error) {
+    return res.status(500).json({ message: "Error fetching seed phrase" });
+  }
+};
 
 
 module.exports = {
@@ -308,6 +305,7 @@ module.exports = {
   sendTransaction,
   checkBalance,
   restoreWallet,
-  loadSeedPhrase
-  // fetchSeedPhrase
+  loadSeedPhrase,
+  changePassword,
+  fetchSeedPhrase
 };

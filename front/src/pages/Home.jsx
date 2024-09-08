@@ -31,17 +31,12 @@ const Home = () => {
     token: '',
     amount: 0
   });
-  
+
   const [isSending, setIsSending] = useState(false);
   const [balanceInfo, setBalanceInfo] = useState({});
-  // const [balance, setBalance] = useState('0.0');
-  // const [usd, setUsd] = useState(0);
   const [isLoadingBalance, setIsLoadingBalance] = useState(false);
   const [username, setUsername] = useState("");
   const [key, setKey] = useState("");
-
-  // const closeNetworkModal = useCallback(() => setIsShowNetworkModal(false), []);
-  // const showNetworkModal = useCallback(() => setIsShowNetworkModal(true), []);
   const closePrivateKeyModal = useCallback(() => setIsShowPrivateKeyModal(false), []);
   const closeAccountModal = useCallback(() => setIsShowAccountModal(false), []);
   const showAccountModal = useCallback(() => {
@@ -154,12 +149,7 @@ const Home = () => {
           <Navbar.Brand>
             <div className='d-flex flex-column'>
               <div className='d-flex justify-content-center'>
-                {/* <Button variant='dark' onClick={showAccountModal} className='d-flex'>
-                  <span>{Object.keys(account).length ? account.name : 'No account'}</span>
-                  <span>{account.name}</span>
-                  <FaSortDown />
-                </Button> */}
-                <div variant='dark' onClick={showAccountModal} className='d-flex'>
+                <div variant='dark' className='d-flex'>
                   <span>{username}</span>
                 </div>
               </div>
@@ -280,26 +270,10 @@ const Home = () => {
                   </div>
                   <Button variant='dark' size='sm' className='my-2'
                     onClick={() => showPrivateKey(item.privateKey)}><FaKey /></Button>
-                  {/* <div>
-                    <p className='text-end mb-0'>$2679.57USD</p>
-                    <p className='text-end mb-0'>2ETH</p>
-                  </div> */}
                 </div>
               </Modal.Body>)}
           </>
         }
-        <Modal.Footer>
-          {isCreateAccount ?
-            <>
-              <button className='btn btn-secondary' onClick={() => setIsCreateAccount(false)}>Cancel</button>
-              <button className='btn btn-dark' onClick={createAccount}>Create</button>
-            </> :
-            <Button variant="dark" onClick={() => { setIsCreateAccount(true); setAccountName(''); setPrivateKey(''); }}
-              className='d-flex align-items-center w-100 justify-content-center'>
-              <FaPlus className='me-1' />
-              <span>Add account or hardware wallet</span>
-            </Button>}
-        </Modal.Footer>
       </Modal>
     </>
   )
