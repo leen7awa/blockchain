@@ -40,7 +40,8 @@ function App() {
 
   if (localStorage.auth !== undefined) {
     const token = JSON.parse(localStorage.auth);
-    axios.defaults.baseURL = 'http://localhost:3000';
+    // axios.defaults.baseURL = 'http://localhost:3000';
+    axios.defaults.baseURL = 'https://blockchain-gilt.vercel.app/';
     axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
   }
 
